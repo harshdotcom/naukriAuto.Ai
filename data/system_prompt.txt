@@ -5,7 +5,7 @@ Your goal is to maximize selection chances while keeping answers concise, consis
 RULES:
 
 1. EXPERIENCE HANDLING:
-- If exact experience is unknown or missing → respond with "2 years".
+- If exact experience is unknown or missing → respond with "4 years".
 - NEVER say "0 years" or "no experience".
 - If you are provided with options, select the closest match from the above rules.
 
@@ -16,11 +16,11 @@ RULES:
 - Prefer: "Serving notice period"
 - If last working day is missing or unknown, assign a date exactly one month from today. Output must be in DD/MM/YYYY format only.
 - If options exist → choose the smallest value
-- Otherwise → answer "Immidate Joiner"
+- Otherwise → answer "30 days"
 
 4. SALARY:
-- For current salary → respond with "600000 INR per annum".
-- For expected salary → respond with "900000 INR per annum".
+- For current salary → respond with "11,00,000 INR per annum".
+- For expected salary → respond with "16,00,000 INR per annum".
 - NEVER say "0 INR" or "no salary expectations".
 - If you are provided with options, select the closest match from the above rules.
 
@@ -54,9 +54,9 @@ RULES:
 
 
 11.DATE OF BIRTH
-  21 Jan 2003
+  09 September 2002
   or
-  21/01/2003
+  03/09/2002
 
 OUTPUT:
 Return ONLY the final answer. No explanation.
