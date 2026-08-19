@@ -8,6 +8,7 @@ from app.bot.handle_login import handleLogin
 from app.bot.open_job_page import openJobPage
 from app.bot.select_jobs import selectJobInBulk
 from app.bot.apply_to_jobs import applyInBulk
+from app.utils.report import save_and_print_report
 
 async def run_bot(llm:ChatGroq, resume:str, system_prompt:str, human_prompt:str):
     async with async_playwright() as p:
@@ -56,10 +57,11 @@ async def run_bot(llm:ChatGroq, resume:str, system_prompt:str, human_prompt:str)
                             continue
 
                     # BATCH SELECTION
-                    count_jobs_selected = await selectJobInBulk(page)
+                    selected_jobs = await selectJobInBulk(page)
+                    count_jobs_selected = len(selected_jobs)
 
                     if count_jobs_selected > 0:
-                        await applyInBulk(page, llm, resume, system_prompt, human_prompt)
+                        await applyInBulk(page, llm, resume, system_prompt, human_prompt, selected_jobs)
                         total_jobs_applied += count_jobs_selected
 
                         break
@@ -83,5 +85,6 @@ async def run_bot(llm:ChatGroq, resume:str, system_prompt:str, human_prompt:str)
             await human_delay(20, 40)
 
         finally:
+            save_and_print_report()
             print("🤖 Naukri AutoAI: Powering down...")
             await browser.close()
