@@ -9,6 +9,7 @@ from app.utils.bot_question import getNaukriBotQuestion
 from app.bot.handle_options import getAvailableOptions
 from app.ai.ai_answer import getAiAnswer
 from app.repository.repo import findAnswerFromPreviousResponse, saveResponseToDB
+from app.utils.report import record_qa
 from typing import Any
 
 
@@ -48,6 +49,7 @@ async def handle_questionnaire(page: Page, llm: ChatGroq, resume:str, system_pro
                 answer = await getAiAnswer(system_prompt, human_prompt, resume, available_options, question, llm)
                 saveResponseToDB(question, available_options, answer)
             print(f"✅ Naukri AutoAI Answer: {answer}")
+            record_qa(question, available_options, answer)
 
             if is_text:
                 await handleTextResponse(input_box, answer, page)
