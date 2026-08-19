@@ -9,17 +9,12 @@ async def getAiAnswer(system_prompt: str, human_prompt:str, resume:str, availabl
                 ("system", system_prompt),
                 ("human", human_prompt)
             ])
-            
+
     prompt = prompt_template.format_messages(
-        resume=resume if should_include_resume(question) else "N/A",
+        resume=resume,
         options=available_options,
         question=question
     )
     raw_response = await llm.ainvoke(prompt)
     answer = raw_response.content.strip().replace("**", "")
     return answer
-
-
-def should_include_resume(question):
-    keywords = ["skill", "project", "technology", "linkedin", "github", "portfolio", "email", "phone", "contact"]
-    return any(k in question.lower() for k in keywords)

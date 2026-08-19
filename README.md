@@ -11,6 +11,7 @@ The project is built with Python, Playwright, LangChain, and Groq. It is designe
 - **LLM-powered decisioning**: Uses Groq through LangChain for reasoning over dynamic questions and available options.
 - **Local response cache**: Reuses answers for previously seen questions to reduce latency and API usage.
 - **Human-like browser interaction**: Adds realistic typing, scrolling, mouse movement, and timing behavior during browser automation.
+- **Run reports**: Generates a JSON and Excel summary of each run — jobs applied, questions answered, and skipped/failed attempts.
 
 ## Tech Stack
 
@@ -96,11 +97,12 @@ app/
   config/          Environment and runtime configuration
   database/        Database utilities
   repository/      Local response storage helpers
-  utils/           File loading, human interaction simulation, and parsing
+  utils/           File loading, human interaction simulation, parsing, and run reports
 data/
   resume.txt       Resume context for AI-generated responses
   system_prompt.txt
   human_prompt.txt
+  reports/         Generated per-run JSON/Excel reports (not committed)
 main.py            Application entry point
 ```
 
@@ -110,6 +112,7 @@ The project stores local runtime data for caching and personalization:
 
 - `naukri_autoai_memory.db`: LangChain SQLite cache for repeated LLM requests.
 - `data/db.json`: Question-and-answer cache for recruiter questionnaires.
+- `data/reports/`: Per-run JSON and Excel reports produced by `app/utils/report.py`.
 
 These files may contain personal or application-specific data and should not be committed.
 
